@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>you can borrow</title>
+    </head>
+    <body>
+        <div class="borrow-content">
+        <div>
+            <h3>details of the borrowed book</h3>
+        </div>
+        <div>
+            <p>borrowed on-  <span style="font-weight: bold;">{% now 'Y:M:D' %}</span></p><br>
+            <p>expected to return on-  {{books.borrowed_on | timeuntil}}</p><br>
+            <p>the book is on shelf-  <span style="font-weight: bold;">{{books.shelf}}</span></p><br>
+        </div>
+        <div>
+            <p>Failure to return on time, you will be surcharged.<br>enter the number of days you've exceeded to determine the fee.<br>Each day is 500.00 Ksh.</p><br>
+            <form class="borrow-form" method="GET" action="{% url 'calculate_func' %}">
+                <input style="margin-bottom: 20px;" type="number" name="days" placeholde="enter days exceeded"><br>
+                <input class="borrow-button" type="submit" value="calculate">
+            </form>
+            <p style="text-transform: capitalize;">amount to be penalised: {{penalty}}</p>
+        </div>
+        </div>
+        <div>
+            {% include 'footer_page.html' %}
+        </div>
+    </body>
+</html>

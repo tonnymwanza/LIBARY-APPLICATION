@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            search
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <h3 style="font-size: 30px;text-align: center;text-decoration: underline;">Select Book</h3>
+            </div>
+            <div style="font-size: 35px; margin-left: 50px;margin-top: 100px;line-height: 50px;border-left: 2px solid;border-bottom: 2px solid; padding-left: 20px;">
+                <ol class="searching">
+                    {% if books %}
+                    {% for book in books %}
+                    <li>
+                        <a href="{% url 'book_details' book.id %}">{{book.name}} by {{book.author}} </a><hr>
+                    </li><br>
+                    {% endfor %}
+                </ol>
+                    {% else %}
+                    <p>Book not found</p>
+                    {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

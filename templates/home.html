@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>
+            home page
+        </title>
+    </head>
+    <body>
+        <div class="main-head">
+            <h1>DIGITAL LIBRARY</h1><br>{% now 'Y:M:D' %}
+        </div>
+        <div class="main-content">
+            <div>
+                <div class="book-head">
+                    <h4>Available books</h4>
+                </div>
+                <div class="book-list">
+                    <ul style="list-style-type: disc;">
+                        {% for books in all_books %}
+                        <li>{{books.name | capfirst | truncatechars:'18'}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="search-book">
+                <div class="search-container">
+                    <h4>Search Book</h4>
+                    <div>
+                        <!-- <input type="search" name="s" placeholder="enter the book title"> -->
+                        <form method="GET" action="{% url 'search' %}" class="search-form">
+                            <input trype="search" name="q" placeholder="enter the book title or author's name"><br>
+                            <input class="sub-button1" type="submit" value="search">
+                        </form>
+                    </div>
+                </div>
+                <div class="add-book">
+                    <h4 class="add-heading">Add Book</h4>
+                    <div>
+                        {% if perms.library_app.add_book %}
+                        <form method="POST" action="{% url 'home_page' %}">
+                            {% csrf_token %}
+                            <div style="margin-bottom: 30px; margin-left: 153px;">
+                                <label>Shelf</label>
+                                {{form.shelf}}
+                            </div>
+                            <div style="margin-bottom: 30px;margin-left: 145px;">
+                                <label>Name</label>
+                                {{form.name}}
+                            </div>
+                            <div style="margin-bottom: 30px;margin-left: 130px;">
+                                <label>Author</label>
+                                {{form.author}}
+                            </div>
+                            <div style="margin-bottom: 30px;">
+                                <label style="margin-left: 130px;">Category</label>
+                                {{form.category}}
+                            </div>
+                            <div style="margin-bottom: 30px;margin-left: 130px;">
+                                <label>Pages</label>
+                                {{form.number_of_pages}}
+                            </div>
+                            <!-- <div style="margin-bottom: 30px;margin-left: 130px;"> -->
+                                <!-- <label>Date of release</label> -->
+                                <!-- {{form.written}} -->
+                            <!-- </div> -->
+                            <div style="margin-bottom: 30px;margin-left: 130px;">
+                                <label>Price</label>
+                                {{form.price}}
+                            </div>
+                            {% for message in messages %}
+                                <p class="fom-errors">{{message}}</p>
+                            {% endfor %}
+                            <div style="margin-bottom: 30px;margin-left: 60px;">
+                                <input class="sub-button2" type="submit" value="Add">
+                            </div>
+                        </form>
+                        {% else %}
+                        <p  style="text-align: center;">You don't have permission to see this page</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <footer>
+                {% include 'footer_page.html' %}
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>the book details</title>
+    </head>
+    <body>
+        <div class="head-details-book">
+            <h4>details for- <span style="text-transform: uppercase; text-decoration:underline;">{{books.name}}</span></h4>
+        </div>
+        <div class="book-details-grid">
+            <div class="book-details">
+                <ol style="list-style-type:lower-roman;">
+                    <li>Name: {{books.name}}</li>
+                    <li>Shelf Number: {{books.shelf}}</li>
+                    <li>Name of author: {{books.author}}</li>
+                    <li>Book genre: {{books.category}}</li>
+                    <li>Number of pages: {{books.number_of_pages}}</li>
+                    <li>The price of the book: {{books.price}}</li>
+                </ol>
+            </div>
+            <div style="text-align: right; margin-right: 30px; font-size: 30px;">
+                <a href="{% url 'borrow_func' books.id%}">Borrow book</a>
+            </div>
+        </div>
+        <div>
+            {% include 'footer_page.html' %}
+        </div>
+    </body>
+</html>

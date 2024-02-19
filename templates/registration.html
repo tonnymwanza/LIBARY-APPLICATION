@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <title>
+            registration
+        </title>
+    </head>
+    <body>
+        <div class="registration-title">
+            <h3>Registration</h3>
+        </div>
+        <div class="registration-form">
+            <form method="POST" action="{% url 'registration' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{next}}">
+                <div style="margin-bottom: 30px;">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter username"><br>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password"><br>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <label>Confirm Password</label>
+                    <input type="password" name="password2" placeholder="Confirm Password"><br>
+                </div>
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+                <div>
+                    <input class="registration-button" type="submit" value="Register?">
+                </div>
+            </form>
+        </div>
+        <div>
+            {% include 'footer_page.html' %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>add your book</title>
+    </head>
+    <body>
+        <div class="add-book">
+            <h4 class="add-heading">Add Book</h4>
+            <div>
+                <form method="POST" action="{% url 'add_book' %}">
+                    {% csrf_token %}
+                    <div style="margin-bottom: 30px; margin-left: 153px;">
+                        <label>Shelf</label>
+                        <input type="number" name="shelves" placeholder="enter shelf number">
+                    </div>
+                    <div style="margin-bottom: 30px;margin-left: 145px;">
+                        <label>Name</label>
+                        <input type="text" name="name" placeholder="the name of the book">
+                    </div>
+                    <div style="margin-bottom: 30px;margin-left: 130px;">
+                        <label>Author</label>
+                        <input type="text" name="author" placeholder="name of author">
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <label style="margin-left: 130px;">Category</label>
+                        {{form.category}}
+                    </div>
+                    <div style="margin-bottom: 30px;margin-left: 130px;">
+                        <label>Pages</label>
+                        <input type="number" name="number_of_pages" placeholder="number of pages the book has">
+                    </div>
+                    <div style="margin-bottom: 30px;margin-left: 130px;">
+                        <label>Date of release</label>
+                        <input type="date" name="written" placeholder="when was the book written">
+                    </div>
+                    <div style="margin-bottom: 30px;margin-left: 130px;">
+                        <label>Price</label>
+                        {{form.price}}
+                    </div>
+                    <div style="margin-bottom: 30px;margin-left: 130px;">
+                        <label>Fun number</label>
+                        <input type="number" name="fun" placeholder="enter random number">
+                    </div>
+                    {% for message in messages %}
+                        <p class="fom-errors">{{message}}</p>
+                    {% endfor %}
+                    <div style="margin-bottom: 30px;margin-left: 60px;">
+                        <input class="sub-button2" type="submit" value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
